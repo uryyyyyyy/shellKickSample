@@ -2,7 +2,6 @@ package com.github.uryyyyyyy.shell;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,12 +50,11 @@ public class Util {
         output.close();
     }
 
-    static File jarResourceToTempFile(File resourceFile, String tempDir){
+    static File jarResourceToTempFile(InputStream in, String tempDir){
         try {
             File tempFile = File.createTempFile("prefix", ".sh", new File(tempDir));
             OutputStream out = new FileOutputStream(tempFile);
 
-            InputStream in = new FileInputStream(resourceFile);
             Util.pipe(in, out);
 
             return tempFile;
